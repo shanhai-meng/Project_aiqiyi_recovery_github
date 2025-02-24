@@ -68,7 +68,7 @@ function clean_log() {
         # 使用 tail 保留最后 50 行，并覆盖原文件
         tail -n 50 "$project_log" > "$project_log.tmp" && mv -f "$project_log.tmp" "$project_log"
     else
-        exit 0
+        ture
     fi
 }
 

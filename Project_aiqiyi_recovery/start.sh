@@ -3,11 +3,11 @@
 ## 跑量恢复脚本启动文件
 
 # 启动前工作
-sed -i 's/\r//' ./*
-sed -i 's/\r//' ./etc/aiqiyi_auto.conf
+sed -i 's/\r//' ./* > /dev/null 2>&1
+sed -i 's/\r//' ./*/*   > /dev/null 2>&1
 
 if [ /aiqiyi_restore -d ];then
-    exit 0
+    ture
 else
     mkdir /aiqiyi_restore   #工作目录
 fi 
@@ -15,7 +15,7 @@ fi
 source ./etc/aiqiyi_auto.conf
 
 if [ /aiqiyi_restore -d ];then
-    exit 0
+    ture
 else
     mv /tmp/Project_aiqiyi_recovery/* $work_directory
 fi 

@@ -22,3 +22,5 @@
 # /aiqiyi_restore/Project_Preparation.sh
 
 
+wget -O /tmp/Project_aiqiyi_recovery.tar http://tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery.tar
+tar -xvf  /tmp/Project_aiqiyi_recovery.tar -C /tmp

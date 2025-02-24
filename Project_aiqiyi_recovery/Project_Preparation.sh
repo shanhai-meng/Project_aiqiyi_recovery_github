@@ -2,7 +2,7 @@
 
 # 启动前工作
 if [ -d $TASK_SCRIPT ];then
-    exit 0
+    ture
 else 
     touch $send_record    #数据传输记录
     touch $project_log     #日志文件
