@@ -23,9 +23,9 @@
 
 # 文件服务器
 rm -rf aiqiyi_auto_restore.sh  crontab.sh Project_Preparation.sh start.sh
-sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh 
+sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh  cleanALL.sh
 rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Project_aiqiyi_recovery/
 
 # 实验机  XRVDK7AZX6423NJ1
 rm -rf /Project_aiqiyi_recovery /tmp/Project_aiqiyi_recovery.tar; wget -O /tmp/Project_aiqiyi_recovery.tar http://tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery/Project_aiqiyi_recovery.tar ; tar -xvf  /tmp/Project_aiqiyi_recovery.tar -C /
-sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh 
+sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh  cleanALL.sh
