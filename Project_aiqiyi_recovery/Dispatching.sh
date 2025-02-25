@@ -13,7 +13,7 @@ function send_detection() {
     # 运行 dstat 命令并提取 send 列的数据
     number=10
     while [ $number -gt 0 ]; do
-        dstat -n 1 1 | awk '/^ / {send = $2} END {print send}' >> $send_record
+        dstat -n 1 1 | column  -t | awk '{send = $2} END {print send}' >> $send_record
         number=$((number - 1))
     done
     # 消除单位并转换为数字

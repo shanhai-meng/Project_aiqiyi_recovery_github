@@ -4,7 +4,7 @@
 # /aiqiyi_restore
 
 # 跑量检测脚本(主程序)
-# /aiqiyi_restore/aiqiyi_auto_restore.sh
+# /aiqiyi_restore/Dispatching.sh
 
 # 数据传输记录
 # aiqiyi_restore/dstat_send.txt  
@@ -22,12 +22,12 @@
 # /aiqiyi_restore/Project_Preparation.sh
 
 # 文件服务器
-sed -i 's/\r//' aiqiyi_auto_restore.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh 
+sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh 
 rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Project_aiqiyi_recovery/
 
 # 实验机  XRVDK7AZX6423NJ1
 sed -i 's/\r//' /Project_aiqiyi_recovery/start.sh
-sed -i 's/\r//' /Project_aiqiyi_recovery/aiqiyi_auto_restore.sh
+sed -i 's/\r//' /Project_aiqiyi_recovery/Dispatching.sh
 sed -i 's/\r//' /Project_aiqiyi_recovery/crontab.sh
 sed -i 's/\r//' /Project_aiqiyi_recovery/Project_Preparation.sh
 sed -i 's/\r//' /Project_aiqiyi_recovery/etc/conf.sh

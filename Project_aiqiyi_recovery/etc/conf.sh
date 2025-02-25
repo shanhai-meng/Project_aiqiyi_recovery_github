@@ -2,7 +2,7 @@
 # 工作目录
 export work_directory="/Project_aiqiyi_recovery"
 # 跑量检测脚本(主程序)
-export TASK_SCRIPT="/Project_aiqiyi_recovery/aiqiyi_auto_restore.sh"
+export TASK_SCRIPT="/Project_aiqiyi_recovery/Dispatching.sh"
 # 数据传输记录
 export send_record="/Project_aiqiyi_recovery/dstat_send.txt"
 # 配置文件

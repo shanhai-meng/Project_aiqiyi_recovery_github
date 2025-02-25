@@ -10,7 +10,7 @@
 # dos2unix start.sh > /dev/null 2>&1
 
 sed -i 's/\r//' /Project_aiqiyi_recovery/start.sh
-sed -i 's/\r//' /Project_aiqiyi_recovery/aiqiyi_auto_restore.sh
+sed -i 's/\r//' /Project_aiqiyi_recovery/Dispatching.sh
 sed -i 's/\r//' /Project_aiqiyi_recovery/crontab.sh
 sed -i 's/\r//' /Project_aiqiyi_recovery/Project_Preparation.sh
 sed -i 's/\r//' /Project_aiqiyi_recovery/etc/conf.sh
