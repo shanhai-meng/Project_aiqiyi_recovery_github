@@ -1,6 +1,6 @@
 # Description: 移除onlyipv6配置
 
-function remove-onlyipv6{
+function ipv6-remove{
 	if grep '<onlyipv6>1</onlyipv6>' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml > /dev/null ;then
 		echo 
 		echo "当前配置为onlyipv6" 

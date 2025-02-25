@@ -1,7 +1,7 @@
 # Description: 更改端口号
 
 
-function change-port{
+function prot-change{
 	# 获取当前端口号
 	port_old=$(grep '<host' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml | awk -F'port="' '{print $2}' | awk -F'"' '{print $1}');
 	# 生成一个新的端口

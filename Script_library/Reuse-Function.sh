@@ -1,7 +1,7 @@
 # Description: 重用函数
 
 # 环境准备
-function Environmental_preparation() {
+function Env_preparation() {
     yum -y install jq >/dev/null 2&>1 || echo "jq 安装失败！"
 }
 

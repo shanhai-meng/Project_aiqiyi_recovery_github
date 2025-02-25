@@ -1,6 +1,6 @@
 # Description: 检查挂载点
 
-function mount_check{ 
+function mount-check{ 
     echo "配置文件中已加载磁盘："
     grep ssddir /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
     echo

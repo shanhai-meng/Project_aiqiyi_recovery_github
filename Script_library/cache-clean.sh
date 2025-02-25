@@ -1,6 +1,6 @@
 # Description: 清除缓存
 
-function clean-cache{
+function cache-clean{
 	/opt/soft/ipes/bin/ipes stop
 	umount -i /data* 
 	sleep 5

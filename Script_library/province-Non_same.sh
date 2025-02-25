@@ -1,6 +1,6 @@
 # Description: 跨省配置
 
-function Non_same_province{
+function province-Non_same{
 	cat /etc/xyapp/recruitConfig.json |python -m json.tool |grep update_dcache_config
 	cp /etc/xyapp/recruitConfig.json /etc/xyapp/recruitConfig.json.bak-$(date +%F)
 	sed -i 's/"update_dcache_config":[[:space:]]*false/"update_dcache_config": true/g' /etc/xyapp/recruitConfig.json

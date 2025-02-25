@@ -1,6 +1,6 @@
 # Description: 重置挂载点
 
-function mount_reset{
+function mount-reset{
 	/opt/soft/ipes/bin/ipes stop
 	umount -i /data* && sleep 5
 	umount /data*

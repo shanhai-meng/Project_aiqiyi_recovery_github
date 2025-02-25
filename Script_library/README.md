@@ -2,20 +2,20 @@
 Reuse-Function.sh
 
 # 检测
-check-IQlYl.sh
+IQlYl-CHECK.sh
 
 # 新增data配置
 data-add_configuration.sh 
 
 # 修改端口
-change-prot.sh
-change-prot.sh.old
+prot-change.sh
+prot-change.sh.old
 
 # 修改带宽
-change-SchedulingBandwidth.sh 
+SchedulingBandwidth-change.sh
 
 # 清理缓存
-clean-cache.sh
+cache-clean.sh
 
 # 跨省/同省
 province-Non_same.sh
@@ -32,4 +32,7 @@ mount-reset.sh
 
 # 端口扫描
 port-scanning.sh
+
+
+
 

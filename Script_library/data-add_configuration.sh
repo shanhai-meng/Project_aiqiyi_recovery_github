@@ -1,6 +1,6 @@
 # Description: 添加数据盘配置
 
-function add_configuration(){
+function data-add_configuration(){
 	echo
 	echo "参考值cap大小（这些是已经写入配置文件中的）：" 
 	jq '.storage.diskinfo' /opt/soft/ipes/var/db/ipes/css-conf/cssconfig.json | jq -c 'to_entries[]'
