@@ -9,7 +9,8 @@ source $project_conf
 #CRON_JOB="1,30 * * * * $TASK_SCRIPT"
 CRON_JOB="* * * * * sh $TASK_SCRIPT"
 # 获取当前用户的 crontab 内容
-current_crontab=$(crontab -l >/dev/null)
+# current_crontab=$(crontab -l >/dev/null)
+current_crontab=$(crontab -l)
 # 检查是否已经存在相同的任务
 if ! echo "$current_crontab" | grep -q "$TASK_SCRIPT"; then
     # 添加新的 cron 任务
