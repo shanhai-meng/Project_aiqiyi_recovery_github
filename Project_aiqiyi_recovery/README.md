@@ -13,7 +13,7 @@
 # /aiqiyi_restore/etc/aiqiyi_auto.conf
 
 # 日志文件     
-# /aiqiyi_restore/logs/auto_restore.log
+# /aiqiyi_restore/logs/project.log
 
 # 计划任务脚本
 # /aiqiyi_restore/crontab.sh
@@ -22,7 +22,7 @@
 # /aiqiyi_restore/Project_Preparation.sh
 
 # 文件服务器
-rm -rf aiqiyi_auto_restore.sh  crontab.sh Project_Preparation.sh start.sh
+rm -rf aiqiyi_project.sh  crontab.sh Project_Preparation.sh start.sh
 sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh  cleanALL.sh
 rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Project_aiqiyi_recovery/
 

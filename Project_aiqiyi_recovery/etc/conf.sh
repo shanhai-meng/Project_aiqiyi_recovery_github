@@ -8,7 +8,7 @@ export send_record="/Project_aiqiyi_recovery/dstat_send.txt"
 # 配置文件
 export project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 # 日志文件     
-export project_log="/Project_aiqiyi_recovery/logs/auto_restore.log"
+export project_log="/Project_aiqiyi_recovery/logs/project.log"
 # 计划任务脚本
 export Crontab="/Project_aiqiyi_recovery/crontab.sh"
 # 项目环境准备
