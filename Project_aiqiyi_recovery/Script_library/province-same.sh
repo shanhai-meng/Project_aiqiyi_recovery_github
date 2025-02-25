@@ -1,5 +1,9 @@
 # Description: 同省配置
 
+# 项目配置
+Reuse_Function="Reuse-Function.sh"
+source $Reuse_Function
+
 function province-same{
 	cat /etc/xyapp/recruitConfig.json |python -m json.tool |grep update_dcache_config
 	cp /etc/xyapp/recruitConfig.json /etc/xyapp/recruitConfig.json.bak-$(date +%F)
@@ -7,13 +11,7 @@ function province-same{
 	chattr +i /etc/xyapp/recruitConfig.json;sed -i 's/<servicerange>0<\/servicerange>/<servicerange>3<\/servicerange>/g' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
 	sed -i 's/<servicerange>0<\/servicerange>/<servicerange>3<\/servicerange>/g' /opt/soft/ipes/var/db/ipes/dcache-data/conf/dcache.xml
 
-	if docker ps | grep k8s > /dev/null ;then
-		echo "当前为k8s，尝试重启容器"
-		docker restart `docker ps -qa` 
-	else
-		echo "当前非k8s,尝试重启ipes"
-		/opt/soft/ipes/bin/ipes stop && /opt/soft/ipes/bin/ipes start && echo "重启ipes成功" || echo "重启ipes失败"
-	fi    
+	restart_ipes
 
 	echo "查看文件锁"
 	lsattr /etc/xyapp/recruitConfig.json

@@ -1,5 +1,9 @@
 # Description: 重置挂载点
 
+# 项目配置
+Reuse_Function="Reuse-Function.sh"
+source $Reuse_Function
+
 function mount-reset{
 	/opt/soft/ipes/bin/ipes stop
 	umount -i /data* && sleep 5

@@ -1,5 +1,8 @@
 # Description: 更改端口号
 
+# 项目配置
+Reuse_Function="Reuse-Function.sh"
+source $Reuse_Function
 
 function prot-change{
 	# 获取当前端口号
@@ -9,5 +12,7 @@ function prot-change{
 	port_new=$random
 	sed -i "s/port=\"$port_old\"/port=\"$port_new\"/" /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
 	sed -i "s/port=\"$port_old\"/port=\"$port_new\"/" /opt/soft/ipes/var/db/ipes/dcache-data/conf/dcache.xml
-	echo "旧的端口值为 $port_old,已将端口号更新为 $port_new."                                                                                                                                                                                                                                           
+	echo "旧的端口值为 $port_old,已将端口号更新为 $port_new."   
+
+	restart_ipes                                                                                                                                                                                                                                        
 }

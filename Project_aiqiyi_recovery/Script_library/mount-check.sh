@@ -1,6 +1,12 @@
 # Description: 检查挂载点
 
+# 项目配置
+Reuse_Function="Reuse-Function.sh"
+source $Reuse_Function
+
 function mount-check{ 
+    Env_preparation    # 环境准备
+    
     echo "配置文件中已加载磁盘："
     grep ssddir /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
     echo

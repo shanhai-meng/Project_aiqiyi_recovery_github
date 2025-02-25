@@ -1,5 +1,7 @@
 #!/bin/bash
-#定时任务，定期执行脚本
+# Description: 定时任务，定期执行脚本
+
+# 项目配置
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 

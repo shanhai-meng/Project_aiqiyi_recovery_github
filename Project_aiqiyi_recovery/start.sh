@@ -1,5 +1,9 @@
 #!/bin/bash
-## 跑量恢复脚本启动文件
+# Description: 跑量恢复脚本启动文件
+
+# 项目配置
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $project_conf
 
 # cd /etc/yum.repos.d/
 # mkdir backup > /dev/null 
@@ -9,14 +13,13 @@
 # cd $work_directory
 # dos2unix start.sh > /dev/null 2>&1
 
-sed -i 's/\r//' /Project_aiqiyi_recovery/start.sh
-sed -i 's/\r//' /Project_aiqiyi_recovery/Dispatching.sh
-sed -i 's/\r//' /Project_aiqiyi_recovery/crontab.sh
-sed -i 's/\r//' /Project_aiqiyi_recovery/Project_Preparation.sh
-sed -i 's/\r//' /Project_aiqiyi_recovery/etc/conf.sh
+# sed -i 's/\r//' /Project_aiqiyi_recovery/start.sh
+# sed -i 's/\r//' /Project_aiqiyi_recovery/Dispatching.sh
+# sed -i 's/\r//' /Project_aiqiyi_recovery/crontab.sh
+# sed -i 's/\r//' /Project_aiqiyi_recovery/Project_Preparation.sh
+# sed -i 's/\r//' /Project_aiqiyi_recovery/etc/conf.sh
 
-project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
-source $project_conf
+
 
 # 启动前工作
 if [ -d "/Project_aiqiyi_recovery"  ];then

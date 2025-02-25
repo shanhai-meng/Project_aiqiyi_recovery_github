@@ -2,6 +2,11 @@
 
 # 环境准备
 function Env_preparation() {
+    cd /etc/yum.repos.d/ 
+	mkdir backup  >> /dev/null
+	mv CentOS-* backup/ >> /dev/null
+	wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo >> /dev/null 
+	cd ~
     yum -y install jq >/dev/null 2&>1 || echo "jq 安装失败！"
 }
 

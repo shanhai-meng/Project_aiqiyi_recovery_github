@@ -1,6 +1,13 @@
 # Description: 添加数据盘配置
 
+# 项目配置
+Reuse_Function="Reuse-Function.sh"
+source $Reuse_Function
+
 function data-add_configuration(){
+	
+	Env_preparation # 环境准备
+
 	echo
 	echo "参考值cap大小（这些是已经写入配置文件中的）：" 
 	jq '.storage.diskinfo' /opt/soft/ipes/var/db/ipes/css-conf/cssconfig.json | jq -c 'to_entries[]'
@@ -30,5 +37,7 @@ function data-add_configuration(){
 	jq '.storage.diskinfo += [{"diskpath": "/data'$data_num'/vod/", "cap": '$size_lv'}]' "$css_data" > "$css_data".bak &&  mv -f "$css_data".bak "$css_data"
 	jq '.storage.disknum += 1' "$css_file" > "$css_file".bak && mv -f "$css_file".bak "$css_file"
 	jq '.storage.disknum += 1' "$css_data" >"$css_data".bak && mv -f "$css_data".bak "$css_data" 
+
+	restart_ipes
 }
            
