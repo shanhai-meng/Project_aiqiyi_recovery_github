@@ -1,6 +1,7 @@
 #!/bin/bash
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
+dos2unix Project_Preparation.sh > /dev/null 2>&1
 # 启动前工作
 if [ -d $TASK_SCRIPT ];then
     ture

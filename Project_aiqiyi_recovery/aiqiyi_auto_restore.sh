@@ -2,6 +2,7 @@
 ## 该脚本主要用爱奇艺为定时检查跑量，自动更换端口
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $config_file
+dos2unix aiqiyi_auto_restore.sh > /dev/null 2>&1
 # 更换端口模块
 # function iqiyi_change_prot() {
 # 		   wget -O /tmp/iqiyi_change_prot.sh http://tw06d0006.onething.net/mengrun/iqiyi_change_prot.sh && sh /tmp/iqiyi_change_prot.sh

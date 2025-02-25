@@ -1,17 +1,23 @@
 #!/bin/bash
 ## 跑量恢复脚本启动文件
+
+# cd /etc/yum.repos.d/
+# mkdir backup > /dev/null 
+# mv -f CentOS-* backup/
+# wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null
+# yum -y install dos2unix > /dev/null 2>&1
+# cd $work_directory
+# dos2unix start.sh > /dev/null 2>&1
+
+sed -i 's/\r//' /Project_aiqiyi_recovery/start.sh
+sed -i 's/\r//' /Project_aiqiyi_recovery/aiqiyi_auto_restore.sh
+sed -i 's/\r//' /Project_aiqiyi_recovery/crontab.sh
+sed -i 's/\r//' /Project_aiqiyi_recovery/Project_Preparation.sh
+sed -i 's/\r//' /Project_aiqiyi_recovery/etc/conf.sh
+
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
-cd /etc/yum.repos.d/
-mkdir backup > /dev/null 
-mv -f CentOS-* backup/
-wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null
-yum -y install dos2unix > /dev/null 2>&1
-cd $work_directory
-dos2unix ./* > /dev/null 2>&1
-dos2unix ./*/* > /dev/null 2>&1
-sed -i 's/\r//' /Project_aiqiyi_recovery/*   
-sed -i 's/\r//' /Project_aiqiyi_recovery/etc/* 
+
 # 启动前工作
 if [ -d "/Project_aiqiyi_recovery"  ];then
     echo "工作目录已经存在"
@@ -23,4 +29,4 @@ chmod +x $prepare
 bash $prepare
 # 程序启动
 bash $Crontab
-bash $TASK_SCRIPT 
+bash $TASK_SCRIPT
