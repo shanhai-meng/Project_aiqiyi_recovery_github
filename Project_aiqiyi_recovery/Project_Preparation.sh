@@ -1,5 +1,8 @@
 #!/bin/bash
 
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $config_file
+
 # 启动前工作
 if [ -d $TASK_SCRIPT ];then
     ture
@@ -12,11 +15,11 @@ fi
 
 # 脚本声明
 echo "          脚本使用须知："
-echo "          --该脚本每10分钟执行一次跑量探测"
-echo "          --当探测结果小于阈值时会自动修改端口"
+echo "                  --该脚本每10分钟执行一次跑量探测"
+echo "                  --当探测结果小于阈值时会自动修改端口"
 echo "          配置文件："
-echo "          --工作目录：$work_directory"
-echo "          --日志信息：$auto_conf"
-echo "          --跑量记录：$send_record"
+echo "                  --工作目录：$work_directory"
+echo "                  --日志信息：$auto_conf"
+echo "                  --跑量记录：$send_record"
 echo "          正在准备脚本环境"
-echo "          —————请稍后"
+echo "                                          —————请稍后"

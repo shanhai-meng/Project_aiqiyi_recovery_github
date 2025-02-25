@@ -1,7 +1,8 @@
 #!/bin/bash
 ## 该脚本主要用爱奇艺为定时检查跑量，自动更换端口
 
-
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $config_file
 
 
 # 更换端口模块

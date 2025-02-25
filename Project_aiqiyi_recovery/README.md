@@ -21,6 +21,6 @@
 # 项目环境准备
 # /aiqiyi_restore/Project_Preparation.sh
 
-
-wget -O /tmp/Project_aiqiyi_recovery.tar http://tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery.tar
-tar -xvf  /tmp/Project_aiqiyi_recovery.tar -C /tmp
+实验机  XRVDK7AZX6423NJ1
+rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Project_aiqiyi_recovery/
+rm -rf /Project_aiqiyi_recovery /tmp/Project_aiqiyi_recovery.tar; wget -O /tmp/Project_aiqiyi_recovery.tar http://tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery/Project_aiqiyi_recovery.tar ; tar -xvf  /tmp/Project_aiqiyi_recovery.tar -C /
