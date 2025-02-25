@@ -1,18 +1,15 @@
 #!/bin/bash
-
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
-source $config_file
-
+source $project_conf
 # 启动前工作
 if [ -d $TASK_SCRIPT ];then
     ture
 else 
     touch $send_record    #数据传输记录
     touch $project_log     #日志文件
-    chmod +x $crontab1      #计划任务1
+    chmod +x $Crontab      #计划任务1
     chmod +x $TASK_SCRIPT  #跑量检测脚本
 fi 
-
 # 脚本声明
 echo "          脚本使用须知："
 echo "                  --该脚本每10分钟执行一次跑量探测"
