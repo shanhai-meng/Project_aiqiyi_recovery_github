@@ -1,8 +1,8 @@
 #!/bin/bash
 ## 该脚本主要用爱奇艺为定时检查跑量，自动更换端口
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
-source $config_file
-dos2unix aiqiyi_auto_restore.sh > /dev/null 2>&1
+source $project_conf
+
 # 更换端口模块
 # function iqiyi_change_prot() {
 # 		   wget -O /tmp/iqiyi_change_prot.sh http://tw06d0006.onething.net/mengrun/iqiyi_change_prot.sh && sh /tmp/iqiyi_change_prot.sh
@@ -55,7 +55,7 @@ function clean_log() {
         # 使用 tail 保留最后 50 行，并覆盖原文件
         tail -n 50 "$project_log" > "$project_log.tmp" && mv -f "$project_log.tmp" "$project_log"
     else
-        ture
+        true
     fi
 }
 send_detection >> $project_log
