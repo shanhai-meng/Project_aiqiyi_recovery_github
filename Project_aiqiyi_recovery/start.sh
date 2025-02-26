@@ -1,7 +1,7 @@
 #!/bin/bash
 # Description: 跑量恢复脚本启动文件
 
-# 项目配置
+# 变量定义（用户配置项）
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 

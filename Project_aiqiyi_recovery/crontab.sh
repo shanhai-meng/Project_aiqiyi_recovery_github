@@ -1,7 +1,7 @@
 #!/bin/bash
 # Description: 定时任务，定期执行脚本
 
-# 项目配置
+# 变量定义（用户配置项）
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 

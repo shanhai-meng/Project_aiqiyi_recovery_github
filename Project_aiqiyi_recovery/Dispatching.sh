@@ -6,39 +6,22 @@
 # 描述信息: 该脚本主要用爱奇艺为定时检查跑量，自动更换端口
 ################################################################################
 
-
-
-################################################################################
-# 日志输出方法定义
-################################################################################
-function LOG_INFO() {
-  echo -e "\033[32m$(date +"%Y-%m-%d %H:%M:%S")\tINFO\t${1}\033[0m"
-}
-
-function LOG_WARN() {
-  echo -e "\033[33m$(date +"%Y-%m-%d %H:%M:%S")\tWARN\t${1}\033[0m"
-}
-
-function LOG_ERROR() {
-  echo -e "\033[31m$(date +"%Y-%m-%d %H:%M:%S")\tERROR\t${1}\033[0m"
-}
-
-
-################################################################################
 # 变量定义（用户配置项）
-################################################################################
-# 项目配置
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 prot_change="/Script_library/prot-change.sh"
+Reuse_Function="Script_library/Reuse-Function.sh"
 source $project_conf
+source $prot_change
+source $Reuse_Function
 
 # env
 datenew=$(date +"%Y-%m-%d %H:%M:%S")
 
 
 ################################################################################
-# 跑量恢复模块
+# 跑量恢复功能
 ################################################################################
+
 # 更换端口模块
 # function iqiyi_change_prot() {
 # 		   wget -O /tmp/iqiyi_change_prot.sh http://tw06d0006.onething.net/mengrun/iqiyi_change_prot.sh && sh /tmp/iqiyi_change_prot.sh
@@ -69,20 +52,20 @@ function send_detection() {
     if [ $average -gt 10000000 ];then
         average2=$(($average/1000000))
     # 输出均值
-        LOG_INFO "当前上传数据量均值为：$average2 M"
+        Color_Yellow "当前上传数据量均值为：$average2 M"
         # echo -e "$datenew\t当前上传数据量均值为：$average2 M"
     else
         average2=$(($average/1000))
-        LOG_ERROR "当前上传数据量均值为：$average2 k"
+        Color_Yellow "当前上传数据量均值为：$average2 k"
         # echo -e "$datenew\t当前上传数据量均值为：$average2 k"
     fi
     # 当上传数据量小于5MB/s时更换端口
     if [ $average -le 5000000 ];then
-         LOG_WARN "当前上传数据量小于5MB/s,尝试更换端口中..."
+        Color_Red "当前上传数据量小于5MB/s,尝试更换端口中..."
 		# echo -e "$datenew\t当前小于5MB/s,尝试更换端口中..."
 		bash $prot_change
 	else
-        LOG_INFO "业务正常运行中!"
+        Color_Green "业务正常运行中!"
 		# echo -e "$datenew\t业务正常运行中!"
 	fi
     # 清理临时文件

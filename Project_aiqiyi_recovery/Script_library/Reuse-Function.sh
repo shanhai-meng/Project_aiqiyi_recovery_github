@@ -1,5 +1,20 @@
 # Description: 重用函数
 
+
+# 字体颜色定义
+function Color_Green() {
+  echo -e "\033[32m${1}\033[0m"
+}
+
+function Color_Yellow() {
+  echo -e "\033[33m${1}\033[0m"
+}
+
+function Color_Red() {
+  echo -e "\033[31m${1}\033[0m"
+}
+
+
 # 环境准备
 function Env_preparation() {
     cd /etc/yum.repos.d/ 

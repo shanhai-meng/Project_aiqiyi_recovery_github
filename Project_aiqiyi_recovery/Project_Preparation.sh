@@ -1,13 +1,13 @@
 #!/bin/bash
-# Description: 项目准备
+# Description: 环境准备
 
-# 项目配置
-project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+# 变量定义（用户配置项）
+project_conf="etc/conf.sh"
+Reuse_Function="Script_library/Reuse-Function.sh"
 source $project_conf
+source $Reuse_Function
 
-function Color_Green() {
-  echo -e "\033[32m\t\t${1}\033[0m"
-}
+
 
 # 启动前工作
 if [ -d $TASK_SCRIPT ];then

@@ -1,6 +1,6 @@
 # Description: 更改端口号
 
-# 项目配置
+# 变量定义（用户配置项）
 Reuse_Function="Reuse-Function.sh"
 source $Reuse_Function
 
