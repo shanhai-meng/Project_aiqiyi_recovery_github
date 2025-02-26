@@ -7,8 +7,8 @@
 ################################################################################
 
 # 变量定义（用户配置项）
-project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
-prot_change="/Script_library/prot-change.sh"
+project_conf="etc/conf.sh"
+prot_change="Script_library/prot-change.sh"
 Reuse_Function="Script_library/Reuse-Function.sh"
 source $project_conf
 source $prot_change
@@ -16,7 +16,7 @@ source $Reuse_Function
 
 # env
 datenew=$(date +"%Y-%m-%d %H:%M:%S")
-
+send_threshold=5000000
 
 ################################################################################
 # 跑量恢复功能
@@ -60,7 +60,7 @@ function send_detection() {
         # echo -e "$datenew\t当前上传数据量均值为：$average2 k"
     fi
     # 当上传数据量小于5MB/s时更换端口
-    if [ $average -le 5000000 ];then
+    if [ $average -le $send_threshold ];then
         Color_Red "当前上传数据量小于5MB/s,尝试更换端口中..."
 		# echo -e "$datenew\t当前小于5MB/s,尝试更换端口中..."
 		bash $prot_change

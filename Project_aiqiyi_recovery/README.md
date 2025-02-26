@@ -23,7 +23,7 @@ project_preparation.sh
 
 文件服务器:
 rm -rf aiqiyi_project.sh  crontab.sh Project_Preparation.sh start.sh
-sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh  cleanALL.sh
+sed -i 's/\r//' *.sh */*.sh
 rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Project_aiqiyi_recovery/
 
 实验机:  XRVDK7AZX6423NJ1

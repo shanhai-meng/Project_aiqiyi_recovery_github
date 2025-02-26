@@ -2,7 +2,7 @@
 # Description: 清理环境
 
 # 变量定义（用户配置项）
-project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+project_conf="etc/conf.sh"
 source $project_conf
 
 # 清理计划任务

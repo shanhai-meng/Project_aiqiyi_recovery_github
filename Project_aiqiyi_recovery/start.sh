@@ -2,7 +2,7 @@
 # Description: 跑量恢复脚本启动文件
 
 # 变量定义（用户配置项）
-project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+project_conf="etc/conf.sh"
 source $project_conf
 
 # cd /etc/yum.repos.d/
