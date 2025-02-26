@@ -51,18 +51,18 @@ function send_detection() {
     if [ $average -gt 10000000 ];then
         average2=$(($average/1000000))
     # 输出均值
-        Color_Yellow "当前上传数据量均值为：$average2 M"
+        Color_Yellow "$datenew\t当前上传数据量均值为：$average2 M"
         # echo -e "$datenew\t当前上传数据量均值为：$average2 M"
     else
         average2=$(($average/1000))
-        Color_Yellow "当前上传数据量均值为：$average2 k"
+        Color_Yellow "$datenew\t当前上传数据量均值为：$average2 k"
         # echo -e "$datenew\t当前上传数据量均值为：$average2 k"
     fi
     # 当上传数据量小于5MB/s时更换端口
     if [ $average -le $send_threshold ];then
-        Color_Red "当前上传数据量小于5MB/s,尝试更换端口中..."
+        Color_Red "$datenew\t当前上传数据量小于5MB/s,尝试更换端口中..."
 		# echo -e "$datenew\t当前小于5MB/s,尝试更换端口中..."
-		bash $port_change
+		port_change >> $project_log
 	else
         Color_Green "业务正常运行中!"
 		# echo -e "$datenew\t业务正常运行中!"
@@ -86,3 +86,4 @@ function clean_log() {
 
 send_detection >> $project_log
 clean_log
+restart_ipes & 

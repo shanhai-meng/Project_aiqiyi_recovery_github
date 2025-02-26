@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function province-Non_same() {
+function province_Non_same() {
 	cat /etc/xyapp/recruitConfig.json |python -m json.tool |grep update_dcache_config
 	cp /etc/xyapp/recruitConfig.json /etc/xyapp/recruitConfig.json.bak-$(date +%F)
 	sed -i 's/"update_dcache_config":[[:space:]]*false/"update_dcache_config": true/g' /etc/xyapp/recruitConfig.json
@@ -13,7 +13,7 @@ function province-Non_same() {
 	sed -i 's/<servicerange>3<\/servicerange>/<servicerange>0<\/servicerange>/g' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
 	sed -i 's/<servicerange>3<\/servicerange>/<servicerange>0<\/servicerange>/g' /opt/soft/ipes/var/db/ipes/dcache-data/conf/dcache.xml
 	
-	restart_ipes
+	restart_ipes &
 	
 	echo "查看文件锁"
 	lsattr /etc/xyapp/recruitConfig.json
@@ -23,4 +23,4 @@ function province-Non_same() {
 	grep servicerange /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
 }
 
-province-Non_same
+province_Non_same

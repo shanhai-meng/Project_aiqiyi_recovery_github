@@ -6,6 +6,8 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
+# env
+datenew=$(date +"%Y-%m-%d %H:%M:%S")
 
 # 定义要添加的 cron 任务
 #CRON_JOB="1,30 * * * * $TASK_SCRIPT"
@@ -18,7 +20,7 @@ if ! echo "$current_crontab" | grep -q "$TASK_SCRIPT"; then
     # 添加新的 cron 任务
     #(echo "$current_crontab"; echo "$CRON_JOB") | crontab -
     printf "%s\n%s\n" "$current_crontab" "$CRON_JOB" | crontab -
-    echo "计划任务已成功添加。"
+    echo -e "$datenew\t计划任务已成功添加。" >> $project_log
 else
-    echo "计划任务已存在，未重复添加。"
+    echo -e "$datenew\t计划任务已存在，未重复添加。" >> $project_log
 fi

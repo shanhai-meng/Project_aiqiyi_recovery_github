@@ -12,7 +12,7 @@ function province-same() {
 	chattr +i /etc/xyapp/recruitConfig.json;sed -i 's/<servicerange>0<\/servicerange>/<servicerange>3<\/servicerange>/g' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
 	sed -i 's/<servicerange>0<\/servicerange>/<servicerange>3<\/servicerange>/g' /opt/soft/ipes/var/db/ipes/dcache-data/conf/dcache.xml
 
-	restart_ipes
+	restart_ipes &
 
 	echo "查看文件锁"
 	lsattr /etc/xyapp/recruitConfig.json
