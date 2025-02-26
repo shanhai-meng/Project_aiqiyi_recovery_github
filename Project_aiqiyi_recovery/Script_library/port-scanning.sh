@@ -15,3 +15,5 @@ function port-scanning{
     | awk -F: '{print $1}') $(curl -s --show-error http://127.0.0.1:8400/info?need=exportstatus | awk -F'<host>' '{print $2}' | awk -F'</host>' '{print $1}' | awk -F: '{print $2}') 
     echo
 }
+
+port-scanning

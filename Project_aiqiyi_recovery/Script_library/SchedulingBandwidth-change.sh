@@ -19,3 +19,5 @@ function SchedulingBandwidth-change() {
         echo""
 fi
 }
+
+SchedulingBandwidth-change

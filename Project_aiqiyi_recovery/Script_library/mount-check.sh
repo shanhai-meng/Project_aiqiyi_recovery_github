@@ -22,3 +22,5 @@ function mount-check{
     dmesg -T | grep "I/O error" | grep -q "sd"  && echo "dmesg存在磁盘IO报错" || echo "无磁盘报错信息" 
     echo 
 }
+
+mount-check

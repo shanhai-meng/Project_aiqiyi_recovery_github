@@ -41,3 +41,4 @@ function data-add_configuration(){
 	restart_ipes
 }
            
+data-add_configuration

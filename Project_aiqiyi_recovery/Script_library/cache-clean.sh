@@ -31,3 +31,5 @@ function cache-clean{
 		echo "Mounted $device to $mount_point"
 	done
 } 
+
+cache-clean

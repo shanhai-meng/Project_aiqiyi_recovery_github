@@ -18,3 +18,5 @@ function mount-reset{
 		echo "Mounted $device to $mount_point"
 	done  
 }
+
+mount-reset

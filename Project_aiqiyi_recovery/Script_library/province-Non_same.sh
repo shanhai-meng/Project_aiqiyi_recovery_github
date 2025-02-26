@@ -21,3 +21,5 @@ function province-Non_same{
 	echo "查看同省情况"
 	grep servicerange /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml
 }
+
+province-Non_same

@@ -20,3 +20,5 @@ function ipv6-remove{
 	grep '<onlyipv6>1</onlyipv6>' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml > /dev/null && echo "onlyipv6配置移除失败，等待自动恢复" 
 	echo
 }
+
+ipv6-remove
