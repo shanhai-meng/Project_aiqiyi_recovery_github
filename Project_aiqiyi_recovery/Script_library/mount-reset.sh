@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function mount-reset{
+function mount-reset() {
 	/opt/soft/ipes/bin/ipes stop
 	umount -i /data* && sleep 5
 	umount /data*

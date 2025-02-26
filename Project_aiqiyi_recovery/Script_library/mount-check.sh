@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function mount-check{ 
+function mount-check() { 
     Env_preparation    # 环境准备
     
     echo "配置文件中已加载磁盘："

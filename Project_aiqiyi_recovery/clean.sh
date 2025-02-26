@@ -7,7 +7,7 @@ source $project_conf
 source $Reuse_Function
 
 # 清理计划任务
-function clean_crontab {
+function clean_crontab() {
     keyword="Project_aiqiyi_recovery"
     crontab -l > /tmp/current_crontab.txt
     sed -i "/$keyword/d" /tmp/current_crontab.txt

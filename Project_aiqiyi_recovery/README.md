@@ -22,10 +22,13 @@ crontab.sh
 project_preparation.sh
 
 文件服务器:
-rm -rf aiqiyi_project.sh  crontab.sh Project_Preparation.sh start.sh
+cd /usr/local/sandai/tw06d0006.onething.net/mengrun/
+rm /usr/local/sandai/tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery
+git clone https://gitee.com/shanhaimygitee/Project_aiqiyi_recovery.git
+cd /usr/local/sandai/tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery/Project_aiqiyi_recovery
 sed -i 's/\r//' *.sh */*.sh
+cd /usr/local/sandai/tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery
 rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Project_aiqiyi_recovery/
 
 实验机:  XRVDK7AZX6423NJ1
 rm -rf /Project_aiqiyi_recovery /tmp/Project_aiqiyi_recovery.tar; wget -O /tmp/Project_aiqiyi_recovery.tar http://tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery/Project_aiqiyi_recovery.tar ; tar -xvf  /tmp/Project_aiqiyi_recovery.tar -C /
-sed -i 's/\r//' Dispatching.sh crontab.sh Project_Preparation.sh start.sh etc/conf.sh  cleanALL.sh

@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function ipv6-remove{
+function ipv6-remove() {
 	if grep '<onlyipv6>1</onlyipv6>' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml > /dev/null ;then
 		echo 
 		echo "当前配置为onlyipv6" 

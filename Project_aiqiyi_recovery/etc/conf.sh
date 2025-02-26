@@ -22,12 +22,12 @@ export Reuse_Function="/Project_aiqiyi_recovery/Script_library/Reuse-Function.sh
 # 检测
 export IQlYl_CHECK="/Project_aiqiyi_recovery/Script_library/IQlYl-CHECK.sh"
 # 新增data配置
-export data-add_configuration="/Project_aiqiyi_recovery/Script_library/data-add_configuration.sh"
+export data_add_configuration="/Project_aiqiyi_recovery/Script_library/data-add_configuration.sh"
 # 修改端口
-export prot_change="/Project_aiqiyi_recovery/Script_library/prot-change.sh"
+export port_change="/Project_aiqiyi_recovery/Script_library/port-change.sh"
 # export prot-change.old="/Project_aiqiyi_recovery/Script_library/prot-change.sh.old"
 # 修改带宽
-export SchedulingBandwidth-change="/Project_aiqiyi_recovery/Script_library/SchedulingBandwidth-change.sh"
+export SchedulingBandwidth_change="/Project_aiqiyi_recovery/Script_library/SchedulingBandwidth-change.sh"
 # 清理缓存
 export cache_clean="/Project_aiqiyi_recovery/Script_library/cache-clean.sh"
 # 跨省/同省

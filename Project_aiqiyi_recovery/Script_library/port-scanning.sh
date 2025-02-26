@@ -3,7 +3,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function port-scanning{ 
+function port-scanning() { 
     echo 
     echo -n "已识别到的v4线路数：" 
     curl -s --show-error http://127.0.0.1:8400/info?need=exportstatus | awk -F'<hostnum>' '{print $2}' | awk -F'</hostnum>' '{print $1}' 

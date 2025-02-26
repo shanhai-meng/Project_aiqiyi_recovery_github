@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function province-same{
+function province-same() {
 	cat /etc/xyapp/recruitConfig.json |python -m json.tool |grep update_dcache_config
 	cp /etc/xyapp/recruitConfig.json /etc/xyapp/recruitConfig.json.bak-$(date +%F)
 	sed -i 's/"update_dcache_config":[[:space:]]*true/"update_dcache_config": false/g' /etc/xyapp/recruitConfig.json

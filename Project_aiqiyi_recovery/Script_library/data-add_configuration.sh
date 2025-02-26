@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function data-add_configuration(){
+function data-add_configuration() {
 	
 	Env_preparation # 环境准备
 
