@@ -2,8 +2,7 @@
 # Description: 环境准备
 
 # 变量定义（用户配置项）
-project_conf="etc/conf.sh"
-Reuse_Function="Script_library/Reuse-Function.sh"
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 

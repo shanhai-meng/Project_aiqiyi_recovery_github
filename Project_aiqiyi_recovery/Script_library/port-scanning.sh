@@ -1,4 +1,7 @@
 # Description: 端口探测
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $project_conf
+source $Reuse_Function
 
 function port-scanning{ 
     echo 

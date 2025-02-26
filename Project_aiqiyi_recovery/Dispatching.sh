@@ -7,12 +7,11 @@
 ################################################################################
 
 # 变量定义（用户配置项）
-project_conf="etc/conf.sh"
-prot_change="Script_library/prot-change.sh"
-Reuse_Function="Script_library/Reuse-Function.sh"
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
-source $prot_change
 source $Reuse_Function
+source $prot_change
+
 
 # env
 datenew=$(date +"%Y-%m-%d %H:%M:%S")

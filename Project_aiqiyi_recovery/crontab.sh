@@ -2,8 +2,9 @@
 # Description: 定时任务，定期执行脚本
 
 # 变量定义（用户配置项）
-project_conf="etc/conf.sh"
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
+source $Reuse_Function
 
 
 # 定义要添加的 cron 任务

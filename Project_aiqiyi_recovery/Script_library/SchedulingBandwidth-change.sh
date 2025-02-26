@@ -1,7 +1,8 @@
 # Description: 更改调度带宽
 
 # 项目配置
-Reuse_Function="Reuse-Function.sh"
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $project_conf
 source $Reuse_Function
 
 function SchedulingBandwidth-change() {

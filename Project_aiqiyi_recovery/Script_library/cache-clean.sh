@@ -1,7 +1,8 @@
 # Description: 清除缓存
 
 # 变量定义（用户配置项）
-Reuse_Function="Reuse-Function.sh"
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $project_conf
 source $Reuse_Function
 
 function cache-clean{

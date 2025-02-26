@@ -12,5 +12,32 @@ export project_log="/Project_aiqiyi_recovery/logs/project.log"
 # 计划任务脚本
 export Crontab="/Project_aiqiyi_recovery/crontab.sh"
 # 项目环境准备
-export prepare="/Project_aiqiyi_recovery/Project_Preparation.sh"
+export prepare="/Project_aiqiyi_recovery/project_preparation.sh"
 
+
+##复用功能
+export Reuse_Function="/Project_aiqiyi_recovery/Script_library/Reuse-Function.sh"
+
+##脚本库
+# 检测
+export IQlYl_CHECK="/Project_aiqiyi_recovery/Script_library/IQlYl-CHECK.sh"
+# 新增data配置
+export data-add_configuration="/Project_aiqiyi_recovery/Script_library/data-add_configuration.sh"
+# 修改端口
+export prot_change="/Project_aiqiyi_recovery/Script_library/prot-change.sh"
+# export prot-change.old="/Project_aiqiyi_recovery/Script_library/prot-change.sh.old"
+# 修改带宽
+export SchedulingBandwidth-change="/Project_aiqiyi_recovery/Script_library/SchedulingBandwidth-change.sh"
+# 清理缓存
+export cache_clean="/Project_aiqiyi_recovery/Script_library/cache-clean.sh"
+# 跨省/同省
+export province_Non_same="/Project_aiqiyi_recovery/Script_library/province-Non_same.sh"
+export province_same="/Project_aiqiyi_recovery/Script_library/province-same.sh"
+# 删除ipv6设置
+export ipv6_remove="/Project_aiqiyi_recovery/Script_library/ipv6-remove.sh"
+# 挂载检测
+export mount_check="/Project_aiqiyi_recovery/Script_library/mount-check.sh"
+# 挂载重置
+export mount_reset="/Project_aiqiyi_recovery/Script_library/mount-reset.sh"
+# 端口扫描
+export port_scanning="/Project_aiqiyi_recovery/Script_library/port-scanning.sh"

@@ -2,8 +2,9 @@
 # Description: 跑量恢复脚本启动文件
 
 # 变量定义（用户配置项）
-project_conf="etc/conf.sh"
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
+source $Reuse_Function
 
 # cd /etc/yum.repos.d/
 # mkdir backup > /dev/null 
@@ -23,9 +24,9 @@ source $project_conf
 
 # 启动前工作
 if [ -d "/Project_aiqiyi_recovery"  ];then
-    echo "工作目录已经存在"
+    echo -e "工作目录已经存在...\n"
 else
-    echo "工作目录不存在"
+    echo -e "工作目录不存在\n"
 fi
 project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 chmod +x $prepare

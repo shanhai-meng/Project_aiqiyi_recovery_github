@@ -1,5 +1,9 @@
 # Description: 更改端口号
 
+project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
+source $project_conf
+source $Reuse_Function
+
 function prot-change{
 	port_old=$(grep '<host' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml | awk -F'port="' '{print $2}' | awk -F'"' '{print $1}')
 	read -p "旧的端口值为 $port_old，请输入想要更换的端口号: " port_new
