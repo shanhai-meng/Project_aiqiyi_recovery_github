@@ -25,7 +25,7 @@ export IQlYl_CHECK="/Project_aiqiyi_recovery/Script_library/IQlYl-CHECK.sh"
 export data_add_configuration="/Project_aiqiyi_recovery/Script_library/data-add_configuration.sh"
 # 修改端口
 export port_change="/Project_aiqiyi_recovery/Script_library/port-change.sh"
-# export prot-change.old="/Project_aiqiyi_recovery/Script_library/prot-change.sh.old"
+# export port-change.old="/Project_aiqiyi_recovery/Script_library/port-change.sh.old"
 # 修改带宽
 export SchedulingBandwidth_change="/Project_aiqiyi_recovery/Script_library/SchedulingBandwidth-change.sh"
 # 清理缓存

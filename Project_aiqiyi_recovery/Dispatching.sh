@@ -22,8 +22,8 @@ send_threshold=5000000
 ################################################################################
 
 # 更换端口模块
-# function iqiyi_change_prot() {
-# 		   wget -O /tmp/iqiyi_change_prot.sh http://tw06d0006.onething.net/mengrun/iqiyi_change_prot.sh && sh /tmp/iqiyi_change_prot.sh
+# function iqiyi_change_port() {
+# 		   wget -O /tmp/iqiyi_change_port.sh http://tw06d0006.onething.net/mengrun/iqiyi_change_port.sh && sh /tmp/iqiyi_change_port.sh
 # }
 
 # 检测跑量模块
@@ -62,7 +62,7 @@ function send_detection() {
     if [ $average -le $send_threshold ];then
         Color_Red "当前上传数据量小于5MB/s,尝试更换端口中..."
 		# echo -e "$datenew\t当前小于5MB/s,尝试更换端口中..."
-		bash $prot_change
+		bash $port_change
 	else
         Color_Green "业务正常运行中!"
 		# echo -e "$datenew\t业务正常运行中!"

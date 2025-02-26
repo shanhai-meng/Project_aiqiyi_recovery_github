@@ -5,7 +5,7 @@ project_conf="/Project_aiqiyi_recovery/etc/conf.sh"
 source $project_conf
 source $Reuse_Function
 
-function prot-change() {
+function port-change() {
 	# 获取当前端口号
 	port_old=$(grep '<host' /opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml | awk -F'port="' '{print $2}' | awk -F'"' '{print $1}')
 	# 生成一个新的端口
@@ -18,5 +18,5 @@ function prot-change() {
 	restart_ipes                                                                                                                                                                                                                                        
 }
 
-prot-change
+port-change
 

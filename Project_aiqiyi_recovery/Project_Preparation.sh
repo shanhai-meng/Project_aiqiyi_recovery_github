@@ -24,6 +24,6 @@ fi
  Color_Green "          配置文件："
  Color_Green "                         工作目录：$work_directory"
  Color_Green "                         日志信息：$project_log"
- Color_Green "                         跑量记录：$send_record"
+#  Color_Green "                         跑量记录：$send_record"
  Color_Green "          正在准备脚本环境"
  Color_Green "                                                          .....请稍后"

@@ -8,8 +8,8 @@ IQlYl-CHECK.sh
 data-add_configuration.sh 
 
 # 修改端口
-prot-change.sh
-prot-change.sh.old
+port-change.sh
+port-change.sh.old
 
 # 修改带宽
 SchedulingBandwidth-change.sh
