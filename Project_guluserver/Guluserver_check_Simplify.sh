@@ -45,7 +45,7 @@ function yum_repos() {
     Color_Yellow "正在备份 YUM 源..."
     cd /etc/yum.repos.d/ 
     mkdir backup  > /dev/null 2>&1
-    mv CentOS-* backup/ 
+    mv CentOS-* backup/ backup  > /dev/null 2>&1
     wget -O --timeout=3 /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null 2>&1
     cd - > /dev/null 2>&1
     echo -e "\033[32mYUM 源备份完成。\033[0m"
@@ -123,13 +123,14 @@ function check_pod() {
 
 # 检查 Ping 连通性
 function Ping_check() {
-    if awk '/runmode/ && /host/' /tmp/multidialstatus.json  >> /dev/null 2>&1 ;then
+    runmode=$(awk '/runmode/ && /host/' /tmp/multidialstatus.json)
+    if  [[ -n $runmode ]];then
         Color_Yellow "正在测试主机 IPv4 连通性..."
         ping -c 1 www.baidu.com > /dev/null 2>&1
         if [ $? -eq 0 ]; then
-            LOG_INFO "宿主机 IPv4 连通性测试成功。"
+            LOG_INFO "主机 IPv4 连通性测试成功。"
         else
-            LOG_ERROR "宿主机 IPv4 连通性测试失败。"
+            LOG_ERROR "主机 IPv4 连通性测试失败。"
         fi
     else
         # 获取所有符合条件的容器 ID
@@ -153,13 +154,14 @@ function Ping_check() {
 }
 
 function Ping6_check() {
-    if awk '/runmode/ && /host/' /tmp/multidialstatus.json  >> /dev/null 2>&1 ;then
+    runmode=$(awk '/runmode/ && /host/' /tmp/multidialstatus.json)
+    if  [[ -n $runmode ]];then
         Color_Yellow "正在测试主机 IPv6 连通性..."
         ping6 -c 1 www.baidu.com > /dev/null 2>&1
         if [ $? -eq 0 ]; then
-            LOG_INFO "宿主机 IPv6 连通性测试成功。"
+            LOG_INFO "宿机 IPv6 连通性测试成功。"
         else
-            LOG_ERROR "宿主机 IPv6 连通性测试失败。"
+            LOG_ERROR "主机 IPv6 连通性测试失败。"
         fi
     else
         # 获取所有符合条件的容器 ID
