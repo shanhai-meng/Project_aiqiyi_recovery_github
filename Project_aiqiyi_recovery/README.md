@@ -32,3 +32,13 @@ rm -rf Project_aiqiyi_recovery.tar ; tar -cvf Project_aiqiyi_recovery.tar Projec
 
 实验机:  XRVDQAA8Q8HLQQYJ
 rm -rf /Project_aiqiyi_recovery /tmp/Project_aiqiyi_recovery.tar; wget -O /tmp/Project_aiqiyi_recovery.tar http://tw06d0006.onething.net/mengrun/Project_aiqiyi_recovery/Project_aiqiyi_recovery.tar ; tar -xvf  /tmp/Project_aiqiyi_recovery.tar -C /
+
+
+gitee 仓库
+git config --global user.name "shanhai_mygitee"
+git config --global user.email "14133090+shanhaimygitee@user.noreply.gitee.com"
+
+
+github 仓库
+git config --global user.name "ShanHai"
+git config --global user.email "mengrun74@gmail.com"

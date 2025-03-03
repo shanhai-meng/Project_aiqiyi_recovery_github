@@ -46,7 +46,7 @@ function yum_repos() {
     cd /etc/yum.repos.d/ 
     mkdir backup  > /dev/null 2>&1
     mv CentOS-* backup/ 
-    wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null 2>&1
+    wget -O --timeout=3 /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null 2>&1
     cd - > /dev/null 2>&1
     echo -e "\033[32mYUM 源备份完成。\033[0m"
 }
@@ -123,42 +123,62 @@ function check_pod() {
 
 # 检查 Ping 连通性
 function Ping_check() {
-    # 获取所有符合条件的容器 ID
-    container_ids=$(docker ps | grep network | awk '{print $1}')
-    # 将容器 ID 转换为数组
-    readarray -t containers <<< "$container_ids"
-    # 获取容器数量
-    num_containers=${#containers[@]}
-    # 随机选择一个容器 ID
-    random_index=$((RANDOM % num_containers))
-    podid=${containers[$random_index]}
-    # 输出正在测试的容器 ID
-    Color_Yellow "正在测试容器 $podid 的 IPv4 连通性..."
-    # 测试 IPv4 连通性
-    if docker exec "$podid" sh -c "ping -c 1 www.baidu.com" > /dev/null 2>&1; then
-        LOG_INFO "容器 $podid 的 IPv4 连通性测试成功。"
+    if awk '/runmode/ && /host/' /tmp/multidialstatus.json  >> /dev/null 2>&1 ;then
+        Color_Yellow "正在测试主机 IPv4 连通性..."
+        ping -c 1 www.baidu.com > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            LOG_INFO "宿主机 IPv4 连通性测试成功。"
+        else
+            LOG_ERROR "宿主机 IPv4 连通性测试失败。"
+        fi
     else
-        LOG_ERROR "容器 $podid 的 IPv4 连通性测试失败。（该结果为随机抽取network测试，不代表全部容器）"
+        # 获取所有符合条件的容器 ID
+        container_ids=$(docker ps | grep network | awk '{print $1}')
+        # 将容器 ID 转换为数组
+        readarray -t containers <<< "$container_ids"
+        # 获取容器数量
+        num_containers=${#containers[@]}
+        # 随机选择一个容器 ID
+        random_index=$((RANDOM % num_containers))
+        podid=${containers[$random_index]}
+        # 输出正在测试的容器 ID
+        Color_Yellow "正在测试容器 $podid 的 IPv4 连通性..."
+        # 测试 IPv4 连通性
+        if docker exec "$podid" sh -c "ping -c 1 www.baidu.com" > /dev/null 2>&1; then
+            LOG_INFO "容器 $podid 的 IPv4 连通性测试成功。"
+        else
+            LOG_ERROR "容器 $podid 的 IPv4 连通性测试失败。（该结果为随机抽取network测试，不代表全部容器）"
+        fi
     fi
 }
 
 function Ping6_check() {
-    # 获取所有符合条件的容器 ID
-    container_ids=$(docker ps | grep network | awk '{print $1}')
-    # 将容器 ID 转换为数组
-    readarray -t containers <<< "$container_ids"
-    # 获取容器数量
-    num_containers=${#containers[@]}
-    # 随机选择一个容器 ID
-    random_index=$((RANDOM % num_containers))
-    podid=${containers[$random_index]}
-    # 输出正在测试的容器 ID
-    Color_Yellow "正在测试容器 $podid 的 IPv6 连通性..."
-    # 测试 IPv6 连通性
-    if docker exec "$podid" sh -c "ping6 -c 1 www.baidu.com" > /dev/null 2>&1; then
-        LOG_INFO "容器 $podid 的 IPv6 连通性测试成功。"
+    if awk '/runmode/ && /host/' /tmp/multidialstatus.json  >> /dev/null 2>&1 ;then
+        Color_Yellow "正在测试主机 IPv6 连通性..."
+        ping6 -c 1 www.baidu.com > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            LOG_INFO "宿主机 IPv6 连通性测试成功。"
+        else
+            LOG_ERROR "宿主机 IPv6 连通性测试失败。"
+        fi
     else
-        LOG_ERROR "容器 $podid 的 IPv6 连通性测试失败。（该结果为随机抽取network测试，不代表全部容器）"
+        # 获取所有符合条件的容器 ID
+        container_ids=$(docker ps | grep network | awk '{print $1}')
+        # 将容器 ID 转换为数组
+        readarray -t containers <<< "$container_ids"
+        # 获取容器数量
+        num_containers=${#containers[@]}
+        # 随机选择一个容器 ID
+        random_index=$((RANDOM % num_containers))
+        podid=${containers[$random_index]}
+        # 输出正在测试的容器 ID
+        Color_Yellow "正在测试容器 $podid 的 IPv6 连通性..."
+        # 测试 IPv6 连通性
+        if docker exec "$podid" sh -c "ping6 -c 1 www.baidu.com" > /dev/null 2>&1; then
+            LOG_INFO "容器 $podid 的 IPv6 连通性测试成功。"
+        else
+            LOG_ERROR "容器 $podid 的 IPv6 连通性测试失败。（该结果为随机抽取network测试，不代表全部容器）"
+        fi
     fi
 }
 
@@ -207,7 +227,7 @@ function Error_dmesg() {
 
     if dmesg -T | grep -q "SYN"; then
         error_SYN=$(dmesg -T | grep "SYN" | tail -1)
-        LOG_WARN "可能存在 SYN洪水攻击："
+        LOG_WARN "可能出现 SYN洪泛："
         LOG_ERROR "$error_SYN"
     else
         # echo -e "\033[32m未发现 SYN 洪泛。\033[0m"
@@ -236,6 +256,14 @@ function Error_dmesg() {
         quantum=$(dmesg -T | grep "HTB: quantum" | tail -1)
         LOG_WARN "quantum 值过大，可能会导致某些流量类别占用过多的带宽，影响其他流量的公平性："
         LOG_ERROR "$quantum"
+    else
+        true
+    fi
+
+    if dmesg -T | grep -q "oom-kill"; then
+        oom=$(dmesg -T | grep "oom-kill" | tail -1)
+        LOG_WARN "oom-kill, 内存不足："
+        LOG_ERROR "$oom"
     else
         true
     fi

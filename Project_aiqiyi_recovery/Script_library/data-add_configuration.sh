@@ -9,13 +9,10 @@ function data_add_configuration() {
 	
 	Env_preparation # 环境准备
 
-	echo
-	echo "参考值cap大小（这些是已经写入配置文件中的）：" 
+	echo -e "\n参考值cap大小（这些是已经写入配置文件中的）：\n" 
 	jq '.storage.diskinfo' /opt/soft/ipes/var/db/ipes/css-conf/cssconfig.json | jq -c 'to_entries[]'
-	echo 
-	echo "挂载点信息：" 
+	echo -e "挂载点信息：\n" 
 	lsblk | grep _lv | grep -v _vg_lv
-	echo 
 	read -p "请输入要写入配置文件中的是data几？" data_num
 	read -p "请输入要写入配置文件中data的大小？" size_lv  
 	config_file="/opt/soft/ipes/var/db/ipes/dcache-conf/dcache.xml"

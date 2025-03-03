@@ -56,7 +56,7 @@ function yum_repos() {
     cd /etc/yum.repos.d/ 
     mkdir backup  > /dev/null 2>&1
     mv CentOS-* backup/ 
-    wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null 2>&1
+    wget -O --timeout=3 /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo > /dev/null 2>&1
     cd - > /dev/null 2>&1
     echo -e "\033[32mYUM 源备份完成。\033[0m"
 }
@@ -133,40 +133,60 @@ function check_pod() {
 
 # 检查 Ping 连通性
 function Ping_check() {
-    success_count=0
-    failure_count=0
-    Color_Yellow "正在测试容器 $value 的 IPv4 连通性..."
-    docker ps | grep network | awk '{print $1}' > "$temp_file"
-    while read -r value; do
-        if docker exec "$value" sh -c "ping -c 1 www.baidu.com" > /dev/null 2>&1; then
-            ((success_count++))
+    if awk '/runmode/ && /host/' /tmp/multidialstatus.json  >> /dev/null 2>&1 ;then
+        Color_Yellow "正在测试主机 IPv4 连通性..."
+        ping -c 1 www.baidu.com > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            LOG_INFO "宿主机 IPv4 连通性测试成功。"
         else
-            LOG_ERROR "容器 $value 的 IPv4 连通性测试失败。"
-            ((failure_count++))
+            LOG_ERROR "宿主机 IPv4 连通性测试失败。"
         fi
-    done <  "$temp_file"
-    rm -f "$temp_file"  # 删除临时文件
-    LOG_INFO "测试完成。"
-    LOG_INFO "Ping ipv4成功数量: $success_count"
-    LOG_ERROR "Ping ipv4失败数量: $failure_count"
+    else
+        success_count=0
+        failure_count=0
+        Color_Yellow "正在测试容器 $value 的 IPv4 连通性..."
+        docker ps | grep network | awk '{print $1}' > "$temp_file"
+        while read -r value; do
+            if docker exec "$value" sh -c "ping -c 1 www.baidu.com" > /dev/null 2>&1; then
+                ((success_count++))
+            else
+                LOG_ERROR "容器 $value 的 IPv4 连通性测试失败。"
+                ((failure_count++))
+            fi
+        done <  "$temp_file"
+        rm -f "$temp_file"  # 删除临时文件
+        LOG_INFO "测试完成。"
+        LOG_INFO "Ping ipv4成功数量: $success_count"
+        LOG_ERROR "Ping ipv4失败数量: $failure_count"
+    fi
 }
 
 function Ping6_check() {
-    success_count1=0
-    failure_count1=0
-    Color_Yellow "正在测试容器 $value 的 IPv6 连通性..."
-    docker ps | grep network | awk '{print $1}' > "$temp_file"
-    while read -r value; do
-        if docker exec "$value" sh -c "ping6 -c 1 www.baidu.com" > /dev/null 2>&1; then
-            ((success_count1++))
+    if awk '/runmode/ && /host/' /tmp/multidialstatus.json >> /dev/null 2>&1;then
+        Color_Yellow "正在主机 IPv6 连通性..."
+        ping6 -c 1 www.baidu.com > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            LOG_INFO "主机 IPv6 连通性测试成功。"
         else
-            LOG_ERROR "容器 $value 的 IPv6 连通性测试失败。"
-            ((failure_count1++))
+            LOG_ERROR "主机 IPv6 连通性测试失败。"
         fi
-    done <  "$temp_file"
-    LOG_INFO "测试完成。"
-    LOG_INFO "Ping ipv6成功数量: $success_count1"
-    LOG_ERROR "Ping ipv6失败数量: $failure_count1"
+    else
+        success_count1=0
+        failure_count1=0
+        Color_Yellow "正在测试容器 $value 的 IPv6 连通性..."
+        docker ps | grep network | awk '{print $1}' > "$temp_file"
+        while read -r value; do
+            if docker exec "$value" sh -c "ping6 -c 1 www.baidu.com" > /dev/null 2>&1; then
+                ((success_count1++))
+            else
+                LOG_ERROR "容器 $value 的 IPv6 连通性测试失败。"
+                ((failure_count1++))
+            fi
+        done <  "$temp_file"
+        LOG_INFO "测试完成。"
+        LOG_INFO "Ping ipv6成功数量: $success_count1"
+        LOG_ERROR "Ping ipv6失败数量: $failure_count1"
+    fi
 }
 
 # 统计 NAT 类型
@@ -214,7 +234,7 @@ function Error_dmesg() {
 
     if dmesg -T | grep -q "SYN"; then
         error_SYN=$(dmesg -T | grep "SYN" | tail -1)
-        LOG_WARN "可能存在 SYN洪水攻击："
+        LOG_WARN "可能出现 SYN洪泛："
         LOG_ERROR "$error_SYN"
     else
         # echo -e "\033[32m未发现 SYN 洪泛。\033[0m"
@@ -243,6 +263,14 @@ function Error_dmesg() {
         quantum=$(dmesg -T | grep "HTB: quantum" | tail -1)
         LOG_WARN "quantum 值过大，可能会导致某些流量类别占用过多的带宽，影响其他流量的公平性："
         LOG_ERROR "$quantum"
+    else
+        true
+    fi
+
+    if dmesg -T | grep -q "oom-kill"; then
+        oom=$(dmesg -T | grep "oom-kill" | tail -1)
+        LOG_WARN "oom-kill, 内存不足："
+        LOG_ERROR "$oom"
     else
         true
     fi
