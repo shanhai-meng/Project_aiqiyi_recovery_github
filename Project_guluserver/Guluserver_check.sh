@@ -133,8 +133,8 @@ function check_pod() {
 
 # 检查 Ping 连通性
 function Ping_check() {
-    runmode=$(awk '/runmode/ && /host/' /tmp/multidialstatus.json)
-    if  [[ -n $runmode ]];then
+    networksum=$(docker ps | grep network | wc -l)
+    if  [ $networksum -eq 0 ];then
         Color_Yellow "正在测试主机 IPv4 连通性..."
         ping -c 1 www.baidu.com > /dev/null 2>&1
         if [ $? -eq 0 ]; then
@@ -145,7 +145,7 @@ function Ping_check() {
     else
         success_count=0
         failure_count=0
-        Color_Yellow "正在测试容器 $value 的 IPv4 连通性..."
+        Color_Yellow "正在测试业务容器的 IPv4 连通性..."
         docker ps | grep network | awk '{print $1}' > "$temp_file"
         while read -r value; do
             if docker exec "$value" sh -c "ping -c 1 www.baidu.com" > /dev/null 2>&1; then
@@ -163,8 +163,8 @@ function Ping_check() {
 }
 
 function Ping6_check() {
-    runmode=$(awk '/runmode/ && /host/' /tmp/multidialstatus.json)
-    if  [[ -n $runmode ]];then
+    networksum=$(docker ps | grep network | wc -l)
+    if  [ $networksum -eq 0 ];then
         Color_Yellow "正在测试主机 IPv6 连通性..."
         ping6 -c 1 www.baidu.com > /dev/null 2>&1
         if [ $? -eq 0 ]; then
@@ -175,7 +175,7 @@ function Ping6_check() {
     else
         success_count1=0
         failure_count1=0
-        Color_Yellow "正在测试容器 $value 的 IPv6 连通性..."
+        Color_Yellow "正在测试业务容器的 IPv6 连通性..."
         docker ps | grep network | awk '{print $1}' > "$temp_file"
         while read -r value; do
             if docker exec "$value" sh -c "ping6 -c 1 www.baidu.com" > /dev/null 2>&1; then
