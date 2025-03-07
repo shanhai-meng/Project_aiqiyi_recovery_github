@@ -201,7 +201,7 @@ function Business_Cache() {
 
 # 检查实例数
 function check_pod() {
-    if [[ $(docker ps | grep 'plugin-gulu-dybkj' |wc -l) != 0 ]];then
+    if [[ $(docker ps | grep 'gulu' |wc -l) != 0 ]];then
         LOG_WARN "[${step_flag}/${step_total}]\t开始查看实例数情况"
         step_flag=$(( ${step_flag} + 1 ))
 
