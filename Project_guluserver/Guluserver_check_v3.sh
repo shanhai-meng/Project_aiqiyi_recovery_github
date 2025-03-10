@@ -40,7 +40,7 @@ datenew=$(date +"%Y-%m-%d %H:%M:%S")
 step_flag=1
 
 # 步骤数量
-step_total=10
+step_total=11
 
 # appid库
 declare -A codes=(
@@ -264,83 +264,21 @@ function Basic_Information() {
 
     # 获取业务状态
     LOG_INFO "\t业务状态：${Business_status}"
-
-    # if [[ -e /xyapp/system/miner.plugin-activation.ipk/tools/recruit_tools ]];then
-    #     LOG_INFO "\t业务名称：${Business_name}"
-    #     LOG_INFO "\t业务APPID：${Business_appid}"
-    #     LOG_INFO "\t业务状态：${Business_status}"
-    # else
-    #     # 如果 Business_name 为空，则通过 XYB_appid 查找业务名称
-    #     search_value=$(echo "$XYB_appid" | tr -d '\001\003')
-    #     found=false  # 用于标记是否找到匹配的业务名称
-
-    #     for key in "${!codes[@]}"; do
-    #         if [[ "${codes[$key]}" == "$search_value" ]]; then
-    #             LOG_INFO "\t业务名称：${key}"  # 输出找到的业务名称
-    #             found=true  # 标记为找到
-    #             break  # 找到后退出循环
-    #         fi
-    #     done
-
-    #     # 如果未找到匹配的业务名称，输出提示信息
-    #     if [[ $found == false ]]; then
-    #         LOG_INFO "\t业务名称：未找到匹配的业务名称"
-    #     fi
-
-    #     LOG_INFO "\t业务APPID：${XYB_appid}"
-    #     LOG_INFO "\t业务状态：未知"
-
-    # fi 
 }
 
+# 查看磁盘iops
+function disk_IOPS() {
+    LOG_WARN "[${step_flag}/${step_total}]\t开始查看磁盘IOPS"
+    step_flag=$(( ${step_flag} + 1 ))
 
-# 查看压测情况
-    # function Business_Press() {
-    #     LOG_WARN "[${step_flag}/${step_total}]\t开始查看往期压测情况"
-    #     step_flag=$(( ${step_flag} + 1 ))
-
-    #     # 获取压测情况
-    #     Press_time=$(cat /xyapp/system/miner.plugin-syspress.ipk/data/syspress_result.json | json_reformat | egrep  'time_str' | awk -F'"' '{print $4}')
-    #     LOG_INFO "\t压测时间：${Press_time}"
-    #     LOG_INFO "\t压测结果："
-    #     cat /xyapp/system/miner.plugin-syspress.ipk/data/syspress_result.json | json_reformat | egrep -w 'upload_speed|ip' | awk -F\" '{
-    #     if ($2 == "ip") {
-    #         ip = $4;  # 提取 IP 地址
-    #     } else if ($2 == "upload_speed") {
-    #         upload_speed = $3;  # 提取 upload_speed 的值
-    #         gsub(",", "", upload_speed);  # 删除字段中的逗号
-    #         print "ip: " ip "      upload_speed"upload_speed;  # 输出格式化结果
-    #     }}' > /tmp/Press_result.txt
-    #     while read -r line; do
-    #         LOG_INFO "\t${line}"
-    #     done < /tmp/Press_result.txt
-    #     rm -f /tmp/Press_result.txt
-    # }
-    # function Business_Press() {
-    #     LOG_WARN "[${step_flag}/${step_total}]\t开始查看往期压测情况"
-    #     step_flag=$(( ${step_flag} + 1 ))
-
-    #     # 获取压测情况
-    #     Press_time=$(cat /xyapp/system/miner.plugin-syspress.ipk/data/syspress_result.json | json_reformat | egrep  'time_str' | awk -F'"' '{print $4}')
-    #     LOG_INFO "\t压测时间：${Press_time}"
-    #     LOG_INFO "\t压测结果："
-        
-    #     cat /xyapp/system/miner.plugin-syspress.ipk/data/syspress_result.json | json_reformat | egrep -w 'upload_speed|ip' | awk -F\" '{
-    #         if ($2 == "ip") {
-    #             ip = $4;  # 提取 IP 地址
-    #         } else if ($2 == "upload_speed") {
-    #             upload_speed = $3;  # 提取 upload_speed 的值
-    #             gsub(",", "", upload_speed);  # 删除字段中的逗号
-    #             printf("ip: %-20s upload_speed: %s\n", ip, upload_speed);  # 格式化输出
-    #         }
-    #     }' > /tmp/Press_result.txt
-
-    #     while read -r line; do
-    #         LOG_INFO "\t${line}"
-    #     done < /tmp/Press_result.txt
-
-    #     rm -f /tmp/Press_result.txt
-    # }
+    # 获取磁盘IOPS
+    jq -r '.disk_info[] | select(.rand_read_iops) | "\(.name): \(.rand_read_iops)"' /etc/xyapp/disk_info.json  > /tmp/iops.txt
+    while read -r line; do
+        LOG_INFO "\t${line}"
+    done < /tmp/iops.txt
+    
+    rm -f /tmp/iops.txt
+}
 
 
 # 查看实例缓存情况
@@ -527,21 +465,8 @@ function p2pStatus() {
     rm -f $p2pStatus
 }
 
-# 获取线路拨号状态
-    # function pppStatus() {
-    #     LOG_WARN "[${step_flag}/${step_total}]\t开始检查拨号异常线路"
-    #     step_flag=$(( ${step_flag} + 1 ))
 
-    #     jq -r '.multidial[] | select(.errmsg != "ok") | "\(.tag)： \(.errmsg)"' /tmp/multidialstatus.json > /tmp/pppStatus.txt
-    #     if [[ $(cat /tmp/pppStatus.txt | wc -l ) == 0 ]]; then
-    #         LOG_INFO "\t所有线路拨号正常。"
-    #     fi
-    #     while read -r errmsg; do
-    #         LOG_ERROR "\t$errmsg"
-    #     done < /tmp/pppStatus.txt
-    #     rm -f /tmp/pppStatus.txt
-
-    # }
+# 查看拨号异常线路
 function pppStatus() {
     LOG_WARN "[${step_flag}/${step_total}]\t开始检查拨号异常线路"
     step_flag=$(( ${step_flag} + 1 ))
@@ -637,8 +562,8 @@ function Error_dmesg() {
 
 # echo -e "\033[33m\n\n开始检查 Guluserver 业务状态...\033[0m"
 yum_repos
-# install_Toolset
 Basic_Information
+disk_IOPS
 p2pStatus
 nat_sum
 Business_Cache

@@ -40,7 +40,7 @@ datenew=$(date +"%Y-%m-%d %H:%M:%S")
 step_flag=1
 
 # 步骤数量
-step_total=10
+step_total=11
 
 # appid库
 declare -A codes=(
@@ -266,6 +266,19 @@ function Basic_Information() {
     LOG_INFO "\t业务状态：${Business_status}"
 }
 
+# 查看磁盘iops
+function disk_IOPS() {
+    LOG_WARN "[${step_flag}/${step_total}]\t开始查看磁盘IOPS"
+    step_flag=$(( ${step_flag} + 1 ))
+
+    # 获取磁盘IOPS
+    jq -r '.disk_info[] | select(.rand_read_iops) | "\(.name): \(.rand_read_iops)"' /etc/xyapp/disk_info.json  > /tmp/iops.txt
+    while read -r line; do
+        LOG_INFO "\t${line}"
+    done < /tmp/iops.txt
+    
+    rm -f /tmp/iops.txt
+}
 
 
 # 查看实例缓存情况
@@ -404,6 +417,7 @@ function Ping6_check() {
         fi
     fi
 }
+
 # 统计 NAT 类型
 function nat_sum() {
     temp_file="/tmp/udp_nat_values.txt"
@@ -450,6 +464,7 @@ function p2pStatus() {
     LOG_ERROR "\t反连失败数量：$p2pFailure"
     rm -f $p2pStatus
 }
+
 
 # 查看拨号异常线路
 function pppStatus() {
@@ -531,7 +546,7 @@ function Error_dmesg() {
     else
         true
     fi
-    
+
     if dmesg -T | grep -q "bad checksum"; then
         oom=$(dmesg -T | grep "bad checksum" | tail -1)
         # LOG_ERROR "\t UDP: bad checksum. UDP 校验错误："
@@ -547,8 +562,8 @@ function Error_dmesg() {
 
 # echo -e "\033[33m\n\n开始检查 Guluserver 业务状态...\033[0m"
 yum_repos
-# install_Toolset
 Basic_Information
+disk_IOPS
 p2pStatus
 nat_sum
 Business_Cache
