@@ -506,7 +506,7 @@ function nat_sum() {
     # 输出统计结果
     for i in {1..6}; do
         if [[ ${nat_counts[$i]} -gt 0 ]]; then
-            LOG_INFO "\tNAT$i 类型数量: ${nat_counts[$i]}"
+            LOG_INFO "\tNAT\033[35m $i \033[0m类型数量: ${nat_counts[$i]}"
         fi
     done
     # 清理临时文件
@@ -617,6 +617,14 @@ function Error_dmesg() {
     if dmesg -T | grep -q "oom-kill"; then
         oom=$(dmesg -T | grep "oom-kill" | tail -1)
         # LOG_ERROR "\toom-kill, 内存不足："
+        LOG_ERROR "\t$oom"
+    else
+        true
+    fi
+
+    if dmesg -T | grep -q "bad checksum"; then
+        oom=$(dmesg -T | grep "bad checksum" | tail -1)
+        # LOG_ERROR "\t UDP: bad checksum. UDP 校验错误："
         LOG_ERROR "\t$oom"
     else
         true
