@@ -264,6 +264,13 @@ function Basic_Information() {
 
     # 获取业务状态
     LOG_INFO "\t业务状态：${Business_status}"
+    
+    # 获取爱奇艺id
+    dcache_id=$(cat /opt/soft/dcache/deviceid)
+    if [ -e /opt/soft/dcache/deviceid ];then
+        LOG_INFO "\t爱奇艺ID：${dcache_id}"
+    fi
+
 }
 
 # 查看磁盘iops
@@ -560,7 +567,6 @@ function Error_dmesg() {
 # 执行检查
 ################################################################################
 
-# echo -e "\033[33m\n\n开始检查 Guluserver 业务状态...\033[0m"
 yum_repos
 Basic_Information
 disk_IOPS
