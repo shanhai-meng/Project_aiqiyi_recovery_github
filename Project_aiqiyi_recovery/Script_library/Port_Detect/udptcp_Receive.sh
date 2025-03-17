@@ -50,4 +50,5 @@ function port_detection() {
     fi
 }
 
+echo "移动网不准确，仅供参考"
 port_detection 
