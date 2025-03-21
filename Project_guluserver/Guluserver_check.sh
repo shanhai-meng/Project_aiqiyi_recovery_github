@@ -300,7 +300,7 @@ function Basic_Information() {
     LOG_INFO "\t业务状态：${Business_status}"
     
     # 获取爱奇艺id
-    dcache_id=$(cat /opt/soft/dcache/deviceid >> /dev/null 2>&1)
+    dcache_id=$(cat /opt/soft/dcache/deviceid)
     if [ -e /opt/soft/dcache/deviceid ];then
         LOG_INFO "\t爱奇艺ID：${dcache_id}"
     fi

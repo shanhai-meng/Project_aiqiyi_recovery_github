@@ -15,9 +15,34 @@ function mount-reset() {
 	do  
 		device=$(echo "$line" | jq -r '.key')
 		mount_point=$(echo "$line" | jq -r '.value')
-		mount "$device" "$mount_point"
-		echo "Mounted $device to $mount_point"
+   # 尝试挂载
+    mount "$device" "$mount_point"
+    if [ $? -eq 0 ]; then
+        echo "Mounted $device to $mount_point"
+    else
+        # 如果挂载失败，提示错误信息
+        echo "Failed to mount $device to $mount_point. Attempting to format the disk..."
+
+        # 格式化磁盘
+        mkfs.xfs "$device"
+        if [ $? -eq 0 ]; then
+            echo "Formatted $device with XFS filesystem."
+
+            # 再次尝试挂载
+            mount "$device" "$mount_point"
+            if [ $? -eq 0 ]; then
+                echo "Mounted $device to $mount_point after formatting."
+            else
+                echo "Failed to mount $device to $mount_point even after formatting. Please check the device and mount point."
+            fi
+        else
+            echo "Failed to format $device with XFS filesystem. Please check the device."
+        fi
+    fi
 	done  
 }
 
 mount-reset
+
+
+
